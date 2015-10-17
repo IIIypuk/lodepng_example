@@ -1,10 +1,10 @@
 CC=gcc
+LDFLAGS= -lglfw -lGL
 OUT=run
 
 all: lodepng.o
 	$(CC) -O2 -o $(OUT) \
-	lodepng.o \
-	main.c -lglfw -lGL -lGLU
+	main.c lodepng.o $(LDFLAGS)
 
 lodepng.o:
 	$(CC) -c ./deps/lodepng/lodepng.c

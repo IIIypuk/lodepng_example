@@ -14,8 +14,6 @@ int main(int argc, char const *argv[])
   if (!glfwInit())
     return -1;
 
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 1);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
   window = glfwCreateWindow(400, 400, "Example Lodepng", NULL, NULL);
   
@@ -38,7 +36,7 @@ int main(int argc, char const *argv[])
   unsigned char *image;
   unsigned int width, height;
 
-  const char *filename = argc > 1 ? argv[1] : "textures/Nav.png";
+  const char *filename = argc > 1 ? argv[1] : "textures/nav.png";
 
   error = lodepng_decode32_file(&image, &width, &height, filename);
   if (error)
@@ -56,17 +54,18 @@ int main(int argc, char const *argv[])
     glLoadIdentity();
     glOrtho(0, 400, 400, 0, -1, 1);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
 
     glClearColor(1, 1, 1, 0);
     glClear(GL_COLOR_BUFFER_BIT);
+
+    glLoadIdentity();
 
     glBindTexture(GL_TEXTURE_2D, texture);
     glEnable(GL_TEXTURE_2D);
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
     
     glColor3ub(255, 235, 115);
-    glBegin(GL_QUADS);
+    glBegin(GL_POLYGON);
       glTexCoord2f(0, 0); glVertex2f(50,  50);
       glTexCoord2f(1, 0); glVertex2f(350,  50);
       glTexCoord2f(1, 1); glVertex2f(350, 350);
